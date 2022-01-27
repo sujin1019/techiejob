@@ -1,24 +1,38 @@
 const mongoose = require('mongoose');
 
-const techSkillSchema = new mongoose.Schema(            {
+const techSkillSchema = mongoose.Schema(            {
     skill: {type: String},
     year: {type: Number}
 });
 
 const userSchema = mongoose.Schema({
     created: {
-        createdAt: true,
-        updatedAt: true
+        type: Date,
+        default: Date.now
     },
-    logo:{
-        data: Buffer,
-        contentType: String
+    id: {
+        type: String,
+        required: [true, 'ID is required']
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is required.']
     },
     companyName: {
         type: String,
         trim: true,
         maxlength: 50,
         required: [true, 'Company Name is required']
+    },
+    token: {
+        type: String
+    },
+    tokenExp: {
+        type: Number
+    },
+    logo:{
+        data: Buffer,
+        contentType: String
     },
     position: {
         type: String,
@@ -33,12 +47,6 @@ const userSchema = mongoose.Schema({
         soft: {
             type: String
         }
-    },
-    token: {
-        type: String
-    },
-    tokenExp: {
-        type: Number
     }
 });
 
